@@ -1,0 +1,20 @@
+name: Update XBS
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update_xbs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set git user
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+    - uses: actions/checkout@v2
+    - name: Run update
+      run: |
+        git rm -r --cached .
+        git commit -m "Update all files"
+        git push origin master
